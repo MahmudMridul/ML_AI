@@ -2,8 +2,7 @@ import numpy as np
 
 # initialize an array
 a = np.array([1, 2, 3, 4, 5])
-a2D = np.array([[1, 2, 3], [4, 5, 6]])
-a3D = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+a2D = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
 
 # gets dimension
 dim = a2D.ndim
@@ -18,19 +17,25 @@ item_size = a2D.itemsize
 total_mem = a2D.nbytes
 
 # access specific element
-a3D[2, 0] = 100
-elem = a3D[2, 0]
+a2D[2, 0] = 100
+elem = a2D[2, 0]
 
 # gets a row
-row = a3D[2, :]
+row = a2D[2, :]
 
 # gets a column
-a3D[:, 2] = np.array([10, 12, 16])
-col = a3D[:, 2]
+a2D[:, 2] = np.array([10, 12, 16])
+col = a2D[:, 2]
 
 # gets elements in specified range [start_index : end_index : step]
-range_elem = a3D[1:3, 1:3:2]
-print(range_elem)
+range_elem = a2D[1:3, 1:3:2]
+
+# creates array with specified shape (5, 3) having random numbers from 0 to 1
+random_1 = np.random.rand(5, 3)
+
+# same as previous but can take tuple as parameter
+random_2 = np.random.random_sample((3, 3))
+print(random_2)
 
 
 

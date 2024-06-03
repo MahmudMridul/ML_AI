@@ -35,7 +35,18 @@ random_1 = np.random.rand(5, 3)
 
 # same as previous but can take tuple as parameter
 random_2 = np.random.random_sample((3, 3))
-print(random_2)
+
+# get data from text file
+numbers = np.genfromtxt('numbers.txt', delimiter=',', dtype='int32')
+
+# returns an array of same size with boolean values
+nums_greater_five = numbers > 5
+
+# pass expression to get values
+nums_smaller_five = numbers[numbers < 5]
+
+# pass list as index
+specific_indexes = a[[1, 2, 4]]
 
 
 

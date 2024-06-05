@@ -1,8 +1,11 @@
+import re
+
 import pandas as pd
 
 pd.set_option("display.max_rows", None)
 pd.set_option("display.max_columns", None)
 pd.set_option("display.width", None)
+pd.options.mode.copy_on_write = True
 
 filePath = "pokemon_data.xlsx"
 
@@ -39,8 +42,33 @@ charizard_basic_info = data.iloc[4:7, 0:6]
 charizard_basic_info["HP"] = charizard_basic_info["HP"] * 2
 
 # get rows satisfying specific conditions
-fire_types = data.loc[(data["Type 1"] == "Fire") & (data["Type 2"] == "Flying")]
+fire_flying_types = data.loc[(data["Type 1"] == "Fire") & (data["Type 2"] == "Flying")]
 
 # get specific rows satisfying specific conditions
 fire_types_info = data.loc[(data["Type 1"] == "Fire") & (data["Type 2"] == "Flying"), ["Name", "HP", "Attack", "Defense"]]
-print(fire_types_info)
+
+fire_type = data.loc[(data["Type 1"] == "Fire")]
+
+# sort values
+fire_type_sorted = fire_type.sort_values("Name", ascending=True, inplace=False)
+
+# sort values with by multiple colums
+fire_type_sorted = fire_type.sort_values(["Name", "HP"], ascending=[True, False])
+
+# add a column
+fire_type["Rating"] = ((fire_type["HP"] + fire_type["Attack"] + fire_type["Defense"] + fire_type["Speed"]) / 1000) * 100
+fire_type["Total"] = fire_type.iloc[:, 3:10].sum(axis=1)
+
+# delete a column
+fire_type = fire_type.drop(columns=["Generation"])
+
+# save data frame as file
+# fire_type.to_csv("FireTypePokemon.csv", index=False)
+# fire_type.to_excel("FireTypePokemon.xlsx", index=False)
+
+# reset index
+# fire_type = fire_type.reset_index()
+# fire_type = fire_type.reset_index(drop=True)
+
+# filter with regex
+grass_water_type = data.loc[data["Type 1"].str.contains("grass|water", flags=re.IGNORECASE, regex=True)]

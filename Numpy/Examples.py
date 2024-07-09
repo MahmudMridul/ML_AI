@@ -48,5 +48,13 @@ nums_smaller_five = numbers[numbers < 5]
 # pass list as index
 specific_indexes = a[[1, 2, 4]]
 
+# -1 refers to automatic or length of given array
+c = np.array([5, 7, 2])
+c_reshape = np.reshape(c, (-1, 1))
+
+# horizontally stack two arrays
+h_stacked = np.hstack((a2D, c_reshape))
+
+
 
 

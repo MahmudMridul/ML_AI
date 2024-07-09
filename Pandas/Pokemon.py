@@ -72,3 +72,7 @@ fire_type = fire_type.drop(columns=["Generation"])
 
 # filter with regex
 grass_water_type = data.loc[data["Type 1"].str.contains("grass|water", flags=re.IGNORECASE, regex=True)]
+
+# get distinct values of a column
+unique_types = data["Type 1"].unique().tolist()
+

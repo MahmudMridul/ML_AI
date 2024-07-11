@@ -6,6 +6,7 @@ from imblearn.over_sampling import RandomOverSampler
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import classification_report
 from sklearn.naive_bayes import GaussianNB
+from sklearn.linear_model import LogisticRegression
 
 pd.set_option("display.max_rows", None)
 pd.set_option("display.max_columns", None)
@@ -69,8 +70,14 @@ test, x_test, y_test = scale_dataset(test, oversampling=False)
 # print(classification_report(y_test, y_pred))
 
 # Naive Bayes
-nb_model = GaussianNB()
-nb_model.fit(x_train, y_train)
+# nb_model = GaussianNB()
+# nb_model.fit(x_train, y_train)
+#
+# y_pred = nb_model.predict(x_test)
+# print(classification_report(y_test, y_pred))
 
-y_pred = nb_model.predict(x_test)
+# Logistic Regression
+lr_model = LogisticRegression()
+lr_model.fit(x_train, y_train)
+y_pred = lr_model.predict(x_test)
 print(classification_report(y_test, y_pred))

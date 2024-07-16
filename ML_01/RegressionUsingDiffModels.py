@@ -1,14 +1,6 @@
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.preprocessing import StandardScaler
-from imblearn.over_sampling import RandomOverSampler
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import classification_report
-from sklearn.naive_bayes import GaussianNB
 from sklearn.linear_model import LinearRegression
-from sklearn.svm import SVC
-# import tensorflow as tf
 import copy
 
 pd.set_option("display.max_rows", None)

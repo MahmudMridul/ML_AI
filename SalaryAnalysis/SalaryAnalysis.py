@@ -27,3 +27,12 @@ colors = ["#b1e7cd", "#854442", "#000000", "#fff4e6", "#3c2f2f",
           "#be9b7b", "#512E5F", "#45B39D", "#AAB7B8 ", "#20B2AA",
           "#FF69B4", "#00CED1", "#FF7F50", "#7FFF00", "#DA70D6"]
 
+
+pd.set_option("display.max_rows", None)
+pd.set_option("display.max_columns", None)
+pd.set_option("display.width", None)
+
+filePath = "../Datasets/DSSalary/ds_salaries.csv"
+df = pd.read_csv(filePath)
+
+print(f"Rows: {df.shape[0]}\nColumns: {df.shape[1]}")

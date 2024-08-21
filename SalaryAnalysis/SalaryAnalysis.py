@@ -27,7 +27,6 @@ colors = ["#b1e7cd", "#854442", "#000000", "#fff4e6", "#3c2f2f",
           "#be9b7b", "#512E5F", "#45B39D", "#AAB7B8 ", "#20B2AA",
           "#FF69B4", "#00CED1", "#FF7F50", "#7FFF00", "#DA70D6"]
 
-
 pd.set_option("display.max_rows", None)
 pd.set_option("display.max_columns", None)
 pd.set_option("display.width", None)
@@ -35,4 +34,59 @@ pd.set_option("display.width", None)
 filePath = "../Datasets/DSSalary/ds_salaries.csv"
 df = pd.read_csv(filePath)
 
-print(f"Rows: {df.shape[0]}\nColumns: {df.shape[1]}")
+
+# summarize the dataset
+def summarize_dataset(data_frame):
+    print(f"Rows: {data_frame.shape[0]}\nColumns: {data_frame.shape[1]}")
+    print(data_frame.info())
+    summary = pd.DataFrame({
+        'count': data_frame.shape[0],
+        'nulls': data_frame.isnull().sum(),
+        'null(%)': data_frame.isnull().mean() * 100,
+        'cardinality': data_frame.nunique()
+    })
+    print(summary)
+    print(data_frame.describe(include=np.number))
+    print(data_frame.describe(include=object))
+
+
+def sum_of_salary_per_year_line_graph(data_frame):
+    sum_of_salary_per_year = data_frame.groupby('work_year')['salary'].sum()
+
+    fig = px.line(
+        sum_of_salary_per_year,
+        x=sum_of_salary_per_year.index,
+        y=sum_of_salary_per_year.values,
+        title='Sum of Salary per Year',
+        labels={'x': 'Work Year', 'y': 'Sum of Salary'},
+        markers=True,
+        color_discrete_sequence=[colors[4]],
+        template='plotly_dark'
+    )
+    fig.show()
+
+
+functions = [
+    summarize_dataset,
+    sum_of_salary_per_year_line_graph
+]
+
+if __name__ == "__main__":
+    prompt = '''
+    summarize_dataset - 1
+    sum_of_salary_per_year_line_graph - 2
+    exit - 0
+    '''
+    run_program = True
+    last_option = 2
+    while run_program:
+        input_string = input(prompt)
+        number = int(input_string)
+
+        if number == 0:
+            run_program = False
+        elif 1 <= number <= len(functions):
+            functions[number - 1](df)
+        else:
+            print("Invalid Input")
+

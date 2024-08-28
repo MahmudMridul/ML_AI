@@ -67,16 +67,19 @@ def sum_of_salary_per_year_line_graph(data_frame):
 
 def first_ten_job_count(data_frame):
     first_ten_jobs = data_frame['job_title'].value_counts()[:10]
-    fig = px.scatter(
+
+    plt.scatter(
         x=first_ten_jobs.index,
         y=first_ten_jobs.values,
-        title='First Ten Job Count',
-        color_discrete_sequence=[colors[3]],
-        size=first_ten_jobs,
-        labels={'x': 'Job Title', 'y': 'Count of Job Title'},
-        template='plotly_dark'
+        s=[1.1 * val for val in first_ten_jobs.values],
+        marker='o',
+        alpha=0.4,
+        c='b',
+        vmin=1.0,
+        vmax=10.0
     )
-    fig.show()
+    plt.xticks(rotation=-60)
+    plt.show()
 
 
 def top_ten_job_salaries(dframe):

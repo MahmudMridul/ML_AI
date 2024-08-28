@@ -22,13 +22,13 @@ import warnings
 
 warnings.filterwarnings('ignore')
 
-colors = ["#b1e7cd", "#854442", "#000000", "#fff4e6", "#3c2f2f",
-          "#be9b7b", "#512E5F", "#45B39D", "#AAB7B8 ", "#20B2AA",
-          "#FF69B4", "#00CED1", "#FF7F50", "#7FFF00", "#DA70D6"]
-
 pd.set_option("display.max_rows", None)
 pd.set_option("display.max_columns", None)
 pd.set_option("display.width", None)
+
+colors = ["#b1e7cd", "#854442", "#000000", "#fff4e6", "#3c2f2f",
+          "#be9b7b", "#512E5F", "#45B39D", "#AAB7B8 ", "#20B2AA",
+          "#FF69B4", "#00CED1", "#FF7F50", "#7FFF00", "#DA70D6"]
 
 filePath = "../Datasets/DSSalary/ds_salaries.csv"
 df = pd.read_csv(filePath)
@@ -49,20 +49,16 @@ def summarize_dataset(data_frame):
     print(data_frame.describe(include=object))
 
 
-def sum_of_salary_per_year_line_graph(data_frame):
-    sum_of_salary_per_year = data_frame.groupby('work_year')['salary'].sum()
+def sum_of_salary_per_year(data_frame):
+    sum_of_salary = data_frame.groupby('work_year')['salary'].sum()
 
-    fig = px.line(
-        sum_of_salary_per_year,
-        x=sum_of_salary_per_year.index,
-        y=sum_of_salary_per_year.values,
-        title='Sum of Salary per Year',
-        labels={'x': 'Work Year', 'y': 'Sum of Salary'},
-        markers=True,
-        color_discrete_sequence=[colors[4]],
-        template='plotly_dark'
-    )
-    fig.show()
+    plt.plot(sum_of_salary.index, sum_of_salary.values, marker='o')
+    plt.xticks(ticks=sum_of_salary.index)
+    plt.yticks(ticks=sum_of_salary.values)
+    plt.title("Sum of Salary Per Year")
+    plt.xlabel("Work Year")
+    plt.ylabel("Sum of Salary")
+    plt.show()
 
 
 def first_ten_job_count(data_frame):
@@ -129,7 +125,7 @@ def avg_salary_by_company_location(dframe):
 
 functions = [
     summarize_dataset,
-    sum_of_salary_per_year_line_graph,
+    sum_of_salary_per_year,
     first_ten_job_count,
     top_ten_job_salaries,
     avg_salary_by_company_location
@@ -138,7 +134,7 @@ functions = [
 if __name__ == "__main__":
     prompt = '''
     summarize_dataset - 1
-    sum_of_salary_per_year_line_graph - 2
+    sum_of_salary_per_year - 2
     first_ten_job_count - 3
     top_ten_job_salaries - 4
     avg_salary_by_company_location - 5

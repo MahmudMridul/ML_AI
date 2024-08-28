@@ -80,21 +80,19 @@ def first_ten_job_count(data_frame):
 
 def top_ten_job_salaries(dframe):
     top_ten = dframe.groupby("job_title")["salary"].sum().sort_values(ascending=False).head(10)
-    # convert to data frame for easier manipulation and plotting
-    df_top_ten = top_ten.reset_index(name="total_salary")
 
-    fig = px.line(
-        df_top_ten,
-        x="job_title",
-        y="total_salary",
-        title="Top 10 Jobs by Total Salary",
-        labels={"job_title": "Job Title", "total_salary": "Total Salary"},
-        color_discrete_sequence=[colors[5]],
-        markers=True,
-        template="plotly_dark"
+    plt.plot(
+        top_ten.index,
+        top_ten.values,
+        marker='o'
     )
-    fig.show()
-
+    plt.xticks(ticks=top_ten.index)
+    plt.yticks(ticks=top_ten.values)
+    plt.title("Top Ten Salaries")
+    plt.xlabel("Job Titles")
+    plt.ylabel("Salary")
+    plt.show()
+    
 
 def avg_salary_by_company_location(dframe):
     means = dframe.groupby('company_location')['salary_in_usd'].mean().reset_index()
@@ -123,33 +121,5 @@ def avg_salary_by_company_location(dframe):
     fig.show()
 
 
-functions = [
-    summarize_dataset,
-    sum_of_salary_per_year,
-    first_ten_job_count,
-    top_ten_job_salaries,
-    avg_salary_by_company_location
-]
-
 if __name__ == "__main__":
-    prompt = '''
-    summarize_dataset - 1
-    sum_of_salary_per_year - 2
-    first_ten_job_count - 3
-    top_ten_job_salaries - 4
-    avg_salary_by_company_location - 5
-    exit - 0
-    
-    '''
-    run_program = True
-    last_option = 2
-    while run_program:
-        input_string = input(prompt)
-        number = int(input_string)
-
-        if number == 0:
-            run_program = False
-        elif 1 <= number <= len(functions):
-            functions[number - 1](df)
-        else:
-            print("Invalid Input")
+    top_ten_job_salaries(df)

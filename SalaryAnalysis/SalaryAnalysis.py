@@ -3,7 +3,6 @@ import numpy as np
 
 import seaborn as sns
 import plotly.express as px
-import plotly.express as px
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 from plotly.offline import iplot, plot
@@ -80,10 +79,57 @@ def first_ten_job_count(data_frame):
     fig.show()
 
 
+def top_ten_job_salaries(dframe):
+    top_ten = dframe.groupby("job_title")["salary"].sum().sort_values(ascending=False).head(10)
+    # convert to data frame for easier manipulation and plotting
+    df_top_ten = top_ten.reset_index(name="total_salary")
+
+    fig = px.line(
+        df_top_ten,
+        x="job_title",
+        y="total_salary",
+        title="Top 10 Jobs by Total Salary",
+        labels={"job_title": "Job Title", "total_salary": "Total Salary"},
+        color_discrete_sequence=[colors[5]],
+        markers=True,
+        template="plotly_dark"
+    )
+    fig.show()
+
+
+def avg_salary_by_company_location(dframe):
+    means = dframe.groupby('company_location')['salary_in_usd'].mean().reset_index()
+
+    fig = px.choropleth(
+        means,
+        locations='company_location',
+        locationmode='USA-states',
+        color='salary_in_usd',
+        color_continuous_scale='Viridis',
+        title='Average Salary by Company Location',
+        labels={'salary_in_usd': 'Average Salary in USD'},
+        template='plotly_dark'
+    )
+
+    fig.update_geos(
+        showcoastlines=True,
+        coastlinecolor='Black',
+        showland=True,
+        landcolor='rgb(243, 243, 243)',
+        showocean=True,
+        oceancolor='rgb(204, 204, 255)',
+        showlakes=True,
+        lakecolor='rgb(127,205,255)',
+    )
+    fig.show()
+
+
 functions = [
     summarize_dataset,
     sum_of_salary_per_year_line_graph,
-    first_ten_job_count
+    first_ten_job_count,
+    top_ten_job_salaries,
+    avg_salary_by_company_location
 ]
 
 if __name__ == "__main__":
@@ -91,6 +137,8 @@ if __name__ == "__main__":
     summarize_dataset - 1
     sum_of_salary_per_year_line_graph - 2
     first_ten_job_count - 3
+    top_ten_job_salaries - 4
+    avg_salary_by_company_location - 5
     exit - 0
     
     '''
@@ -106,4 +154,3 @@ if __name__ == "__main__":
             functions[number - 1](df)
         else:
             print("Invalid Input")
-

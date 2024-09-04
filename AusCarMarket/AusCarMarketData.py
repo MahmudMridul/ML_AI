@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.ticker import FuncFormatter
 import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
@@ -34,9 +35,17 @@ def summarize_data(df):
 # Fewer bins: Produces a smoother histogram that might hide details but makes the overall pattern easier to see.
 def price_distribution(df):
     plt.figure(figsize=(10,5))
-    sns.histplot(df['Price'], kde=False, bins=50)
+    sns.histplot(df['Price'], kde=False, bins=100)
     plt.title("Price Distribution")
+
+    # In Python, _ is commonly used as a placeholder variable name to indicate that
+    # the value it holds is not going to be used.
+    formatter = FuncFormatter(lambda x, _: f'${x / 1e6:.1f}M' if x >= 1e6 else f'${x / 1e3:.0f}K')
+    # gca = get current axis
+    plt.gca().xaxis.set_major_formatter(formatter)
+
     plt.show()
+
 
 if __name__ == "__main__":
     price_distribution(car_market)

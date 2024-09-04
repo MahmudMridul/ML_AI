@@ -29,5 +29,14 @@ def summarize_data(df):
     print(df.describe())
 
 
+# The number of bins you choose affects the appearance of the histogram
+# More bins: Leads to a more detailed histogram that might show more variability in the data but can also look noisier.
+# Fewer bins: Produces a smoother histogram that might hide details but makes the overall pattern easier to see.
+def price_distribution(df):
+    plt.figure(figsize=(10,5))
+    sns.histplot(df['Price'], kde=False, bins=50)
+    plt.title("Price Distribution")
+    plt.show()
+
 if __name__ == "__main__":
-    summarize_data(car_market)
+    price_distribution(car_market)

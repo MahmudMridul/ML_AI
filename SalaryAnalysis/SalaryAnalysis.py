@@ -5,6 +5,7 @@ import seaborn as sns
 import plotly.express as px
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
+from pandas.core.common import random_state
 from plotly.offline import iplot, plot
 from plotly.subplots import make_subplots
 from matplotlib.colors import ListedColormap
@@ -121,5 +122,42 @@ def avg_salary_by_company_location(dframe):
     fig.show()
 
 
+def get_xy(dframe):
+    x = dframe.drop(['company_size'], axis=1)
+    y = dframe['company_size']
+    return x, y
+
+def encode_categorical_columns(x):
+    for column in x.select_dtypes(include=['object']).columns:
+        le = LabelEncoder()
+        x[column] = le.fit_transform(x[column])
+    return x
+
+
+def encode_target(y):
+    encoder = LabelEncoder()
+    y = encoder.fit_transform(y)
+    return y
+
 if __name__ == "__main__":
-    top_ten_job_salaries(df)
+    x, y = get_xy(df)
+    x = encode_categorical_columns(x)
+    y = encode_target(y)
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+
+    # Scale the features
+    sc = StandardScaler()
+    x_train = sc.fit_transform(x_train)
+    x_test = sc.fit_transform(x_test)
+
+    # Train model
+    xgb = XGBClassifier(random_state=40)
+    xgb.fit(x_train, y_train)
+
+    # Predict and evaluate
+    y_pred = xgb.predict(x_test)
+    accuracy = accuracy_score(y_test, y_pred)
+    report = classification_report(y_test, y_pred)
+    print(f'Accuracy: {accuracy:.2f}')
+    print(f'Report: \n{report}')
+

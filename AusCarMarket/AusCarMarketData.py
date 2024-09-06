@@ -20,6 +20,9 @@ pd.set_option("display.width", None)
 path = "../Datasets/AusCarMarket/cars_info.csv"
 car_market = pd.read_csv(path)
 
+conversion_rate = 0.67
+car_market['Price_USD'] = car_market['Price'] * conversion_rate
+
 def summarize_data(df):
     print(df.info())
     print('***************************************************************************************************')

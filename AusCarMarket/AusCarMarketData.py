@@ -57,11 +57,27 @@ def brand_polarity(df):
 
 def fuel_type_distribution(df):
     plt.figure(figsize=(15, 6))
+    # here x is the column name that will be plotted in the x axis
     sns.countplot(data=df, x='Fuel')
     plt.title('Fuel Type Distribution')
     plt.xticks(rotation=90)
     plt.show()
 
 
+def price_year_comparison(df):
+    plt.figure(figsize=(10,6))
+    sns.scatterplot(data=df, x='Year', y='Price')
+    plt.title('Price vs. Year')
+    plt.show()
+
+
+def price_km_comparison(df):
+    plt.figure(figsize=(10,6))
+    sns.scatterplot(data=df, x='Kilometers', y='Price')
+    plt.title('Price vs. Kilometers')
+    plt.show()
+
+
+
 if __name__ == "__main__":
-    fuel_type_distribution(car_market)
+    price_km_comparison(car_market)

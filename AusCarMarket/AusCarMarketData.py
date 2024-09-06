@@ -47,5 +47,13 @@ def price_distribution(df):
     plt.show()
 
 
+def brand_polarity(df):
+    plt.figure(figsize=(12, 6))
+    sns.countplot(data=df, x='Brand', order=df['Brand'].value_counts().index)
+    plt.title('Brand Popularity')
+    plt.xticks(rotation=90)
+    plt.show()
+
+
 if __name__ == "__main__":
-    price_distribution(car_market)
+    brand_polarity(car_market)

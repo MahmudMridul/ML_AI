@@ -38,7 +38,7 @@ def summarize_data(df):
 # Fewer bins: Produces a smoother histogram that might hide details but makes the overall pattern easier to see.
 def price_distribution(df):
     plt.figure(figsize=(10,5))
-    sns.histplot(df['Price'], kde=False, bins=100)
+    sns.histplot(df['Price_USD'], kde=False, bins=100)
     plt.title("Price Distribution")
 
     # In Python, _ is commonly used as a placeholder variable name to indicate that
@@ -69,21 +69,21 @@ def fuel_type_distribution(df):
 
 def price_year_comparison(df):
     plt.figure(figsize=(10,6))
-    sns.scatterplot(data=df, x='Year', y='Price')
+    sns.scatterplot(data=df, x='Year', y='Price_USD')
     plt.title('Price vs. Year')
     plt.show()
 
 
 def price_km_comparison(df):
     plt.figure(figsize=(10,6))
-    sns.scatterplot(data=df, x='Kilometers', y='Price')
+    sns.scatterplot(data=df, x='Kilometers', y='Price_USD')
     plt.title('Price vs. Kilometers')
     plt.show()
 
 
 def price_brand_comparison(df):
     plt.figure(figsize=(12, 6))
-    sns.boxplot(data=df, x='Brand', y='Price')
+    sns.boxplot(data=df, x='Brand', y='Price_USD')
     plt.title('Price by Brand')
     plt.xticks(rotation=90)
     plt.show()

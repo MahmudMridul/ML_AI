@@ -78,6 +78,13 @@ def price_km_comparison(df):
     plt.show()
 
 
+def price_brand_comparison(df):
+    plt.figure(figsize=(12, 6))
+    sns.boxplot(data=df, x='Brand', y='Price')
+    plt.title('Price by Brand')
+    plt.xticks(rotation=90)
+    plt.show()
+
 
 if __name__ == "__main__":
-    price_km_comparison(car_market)
+    price_brand_comparison(car_market)

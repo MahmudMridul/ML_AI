@@ -55,5 +55,13 @@ def brand_polarity(df):
     plt.show()
 
 
+def fuel_type_distribution(df):
+    plt.figure(figsize=(15, 6))
+    sns.countplot(data=df, x='Fuel')
+    plt.title('Fuel Type Distribution')
+    plt.xticks(rotation=90)
+    plt.show()
+
+
 if __name__ == "__main__":
-    brand_polarity(car_market)
+    fuel_type_distribution(car_market)

@@ -1,19 +1,99 @@
-Take, taking, took, taken
-Run, running, ran, run
-Speak, speaking, spoke, spoken
-Write, writing, wrote, written
-Sing, singing, sang, sung
-Begin, beginning, began, begun
-See, seeing, saw, seen
-Give, giving, gave, given
-Drive, driving, drove, driven
-Swim, swimming, swam, swum
-Drink, drinking, drank, drunk
-Fly, flying, flew, flown
-Buy, buying, bought, bought
-Teach, teaching, taught, taught
-Break, breaking, broke, broken
-Choose, choosing, chose, chosen
-Bring, bringing, brought, brought
-Catch, catching, caught, caught
-Know, knowing, knew, known
+go  
+going  
+went  
+gone  
+
+take  
+taking  
+took  
+taken  
+
+run  
+running  
+ran  
+run  
+
+speak  
+speaking  
+spoke  
+spoken  
+
+write  
+writing  
+wrote  
+written  
+
+sing  
+singing  
+sang  
+sung  
+
+begin  
+beginning  
+began  
+begun  
+
+see  
+seeing  
+saw  
+seen  
+
+give  
+giving  
+gave  
+given  
+
+drive  
+driving  
+drove  
+driven  
+
+swim  
+swimming  
+swam  
+swum  
+
+drink  
+drinking  
+drank  
+drunk  
+
+fly  
+flying  
+flew  
+flown  
+
+buy  
+buying  
+bought  
+bought  
+
+teach  
+teaching  
+taught  
+taught  
+
+break  
+breaking  
+broke  
+broken  
+
+choose  
+choosing  
+chose  
+chosen  
+
+bring  
+bringing  
+brought  
+brought  
+
+catch  
+catching  
+caught  
+caught  
+
+know  
+knowing  
+knew  
+known

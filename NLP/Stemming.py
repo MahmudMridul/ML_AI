@@ -1,27 +1,9 @@
-from NLP.Tokenization import get_words_from_corpus
-from nltk.stem import PorterStemmer
-from nltk.stem import SnowballStemmer
+from NLP.NLPFunctions import get_corpus, stem_word, get_words_from_corpus
 
 file_path = '../Datasets/NLP/stemming.txt'
 
-def get_corpus():
-    with open(file_path, 'r') as file:
-        corps = file.read()
-    return corps
-
-def stem_word(word_list, algo = 0):
-    stemmer = None
-
-    if algo == 0:
-        stemmer = PorterStemmer()
-    elif algo == 1:
-        stemmer = SnowballStemmer('english')
-
-    for word in word_list:
-        print(f'{word}\t{stemmer.stem(word)}')
-
 
 if __name__ == '__main__':
-    corpus = get_corpus()
+    corpus = get_corpus(file_path)
     words = get_words_from_corpus(corpus)
     stem_word(words, 1)

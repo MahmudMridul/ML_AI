@@ -9,7 +9,7 @@ def get_corpus():
         corps = file.read()
     return corps
 
-def stem_word(list, algo = 0):
+def stem_word(word_list, algo = 0):
     stemmer = None
 
     if algo == 0:
@@ -17,7 +17,7 @@ def stem_word(list, algo = 0):
     elif algo == 1:
         stemmer = SnowballStemmer('english')
 
-    for word in list:
+    for word in word_list:
         print(f'{word}\t{stemmer.stem(word)}')
 
 
